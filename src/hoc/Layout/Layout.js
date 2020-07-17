@@ -7,7 +7,7 @@ import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
 import Toolbar from '../../components/Navigation/Toolbar/Toolsbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import Checkout from '../../containers/Checkout/Checkout';
-
+import Orders from '../../containers/Orders/Order';
 // import styles
 import classes from './Layout.module.css';
 
@@ -44,6 +44,7 @@ class Layout extends Component {
         <main className={classes.layoutMain}>
           <Switch>
             <Route path="/checkout" component={Checkout} />
+            <Route path="/orders" component={Orders} />
             <Route path="/" exact component={BurgerBuilder} />
           </Switch>
         </main>
