@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 // import components
 import Aux from '../Aux/Aux';
 import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
 import Toolbar from '../../components/Navigation/Toolbar/Toolsbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import Checkout from '../../containers/Checkout/Checkout';
 
 // import styles
 import classes from './Layout.module.css';
@@ -40,7 +42,10 @@ class Layout extends Component {
           closed={this.sideDrawerClosedHandler}
         />
         <main className={classes.layoutMain}>
-          <BurgerBuilder />
+          <Switch>
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/" exact component={BurgerBuilder} />
+          </Switch>
         </main>
         FOOTER
       </Aux>

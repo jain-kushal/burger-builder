@@ -29,6 +29,7 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props);
     axios
       .get('https://react-burger-builder-6da90.firebaseio.com/ingredients.json')
       .then((res) => {
@@ -106,38 +107,54 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    // alert('You clicked continue!!');
-    this.setState({
-      loading: true,
+    // // alert('You clicked continue!!');
+    // this.setState({
+    //   ...this.state,
+    //   loading: true,
+    // });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Kushal Jain',
+    //     address: {
+    //       street: 'Test street',
+    //       zipCode: '12345',
+    //       country: 'United States',
+    //     },
+    //     email: 'test@gmail.com',
+    //   },
+    //   deliveryMethod: 'fastest',
+    // };
+    // axios
+    //   .post('/orders.json', order)
+    //   .then((res) => {
+    //     this.setState({
+    //       ...this.state,
+    //       loading: false,
+    //       purchasing: false,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     this.setState({
+    //       ...this.state,
+    //       loading: false,
+    //       purchasing: false,
+    //     });
+    //   });
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          '=' +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+    const queryString = queryParams.join('&');
+    this.props.history.push({
+      pathname: '/checkout',
+      search: `?${queryString}`,
     });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Kushal Jain',
-        address: {
-          street: 'Test street',
-          zipCode: '12345',
-          country: 'United States',
-        },
-        email: 'test@gmail.com',
-      },
-      deliveryMethod: 'fastest',
-    };
-    axios
-      .post('/orders.json', order)
-      .then((res) => {
-        this.setState({
-          loading: false,
-          purchasing: false,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          loading: false,
-          purchasing: false,
-        });
-      });
   };
 
   render() {
