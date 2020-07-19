@@ -23,3 +23,8 @@
   color: #944317;
   border: 1px solid #944317;
 }
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
